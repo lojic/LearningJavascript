@@ -2,9 +2,11 @@ import { arrayMax, arrayMin, identity, range, stringToNumbers} from "../advent.j
 import { data } from "./data.js";
 
 function solve(cost, positions) {
-  const sumFuel = pos => positions.reduce((sum, n) => sum + cost(Math.abs(n - pos)), 0);
+  const beg     = arrayMin(positions),
+        end     = arrayMax(positions),
+        sumFuel = pos => positions.reduce((sum, n) => sum + cost(Math.abs(n - pos)), 0);
 
-  return arrayMin(range(arrayMin(positions), arrayMax(positions)).map(sumFuel));
+  return arrayMin(range(beg, end).map(sumFuel));
 }
 
 const part1Cost = identity;
